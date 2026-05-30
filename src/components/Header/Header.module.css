@@ -1,0 +1,28 @@
+.header {
+  width: 100%;
+  background-color: var(--color-white);
+  padding: 20px 0;
+}
+
+.headerContent {
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  align-items: center;
+  width: 100%;
+  padding: 0 128px;
+}
+
+.headerContent > :nth-child(1) {
+  justify-self: start;
+}
+
+.headerContent > :nth-child(2) {
+  justify-self: center;
+}
+
+.authButtons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-self: end;
+}

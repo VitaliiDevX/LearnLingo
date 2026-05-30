@@ -4,10 +4,10 @@
   --transition: 300ms ease-in-out;
 
   --color-white: #ffffff;
-  --color-light-gray: #f8f8f8;
-
-  --color-black: #121417;
-  --color-gray: #8a8a89;
+  --color-gray-50: #f8f8f8;
+  --color-gray-100: #ecebeb;
+  --color-gray-400: #8a8a89;
+  --color-gray-900: #121417;
 
   --color-accent: #f4c550;
   --color-accent-hover: #ffdc86;
@@ -18,22 +18,22 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 html {
   scroll-behavior: smooth;
-  scrollbar-color: var(--color-accent) var(--color-light-gray);
+  scrollbar-color: var(--color-accent) var(--color-gray-50);
 }
 
 body {
   background-color: var(--color-white);
-  color: var(--color-black);
+  color: var(--color-gray-900);
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
-  letter-spacing: -0.02em;
-  margin: 0;
 }
 
 #root {
@@ -44,7 +44,7 @@ body {
 
 ::selection {
   background-color: var(--color-accent);
-  color: var(--color-black);
+  color: var(--color-gray-900);
 }
 
 :focus-visible {
@@ -68,25 +68,14 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-  color: var(--color-black);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
 h6,
 p {
-  margin: 0;
+  color: var(--color-gray-900);
 }
 
 ul,
 ol {
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 a {
@@ -96,15 +85,14 @@ a {
 
 button {
   cursor: pointer;
-  border: none;
-  background: none;
-  font-family: inherit;
 }
 
 input,
 select,
-textarea {
+textarea,
+button {
   font-family: inherit;
+  font-size: inherit;
   outline: none;
   background: none;
   border: none;
