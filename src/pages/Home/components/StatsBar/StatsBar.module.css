@@ -1,0 +1,40 @@
+.wrapper {
+  width: 100%;
+  border: 1.5px dashed var(--color-accent);
+  border-radius: 30px;
+  padding: 40px;
+}
+
+.statsList {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 100px;
+}
+
+.statCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.statValue {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+
+  font-size: 28px;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+}
+
+.statLabel {
+  color: var(--color-gray-400);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.02em;
+  max-width: 90px;
+}

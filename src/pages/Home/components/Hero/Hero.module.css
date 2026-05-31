@@ -1,0 +1,15 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr; /* Одна колонка на мобільних */
+  gap: 24px;
+
+  @media only screen and (min-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .gridContainer > :last-child {
+    grid-column: 1 / -1;
+  }
+}

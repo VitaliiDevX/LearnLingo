@@ -3,7 +3,7 @@ import css from "./HeroInfo.module.css";
 
 export default function HeroInfo() {
   return (
-    <div className={css.heroInfo}>
+    <div className={css.wrapper}>
       <h1 className={css.title}>
         Unlock your potential with the best{" "}
         <span className={css.accent}>language</span> tutors

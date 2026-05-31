@@ -1,0 +1,39 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  border-radius: 30px;
+  background-color: var(--color-emphasis);
+  flex-basis: calc(
+    min(1440px, 100vw) - 24px - (var(--container-padding) * 2) -
+      min(720px, 50vw)
+  );
+  padding: 32px 32px 0;
+}
+
+.image {
+  margin-bottom: -64px;
+}
+
+.laptop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 360px;
+  height: 170px;
+  background: linear-gradient(
+    180deg,
+    var(--laptop-start) 0%,
+    var(--laptop-end) 100%
+  );
+  justify-self: flex-end;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.appleIcon {
+  height: 56px;
+  width: 46px;
+}

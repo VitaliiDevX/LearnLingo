@@ -13,6 +13,8 @@
   --color-emphasis: #fbe9ba;
   --color-accent-hover: #ffdc86;
   --color-accent-active: #dfb13c;
+  --laptop-start: #eeb055;
+  --laptop-end: #d08f38;
 }
 
 *,
@@ -102,18 +104,18 @@ button {
 
 /* container */
 .container {
+  --container-padding: 20px;
+
   width: 100%;
-  max-width: 375px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 var(--container-padding);
 
   @media only screen and (min-width: 768px) {
-    max-width: 768px;
-    padding: 0 32px;
+    --container-padding: 32px;
   }
 
   @media only screen and (min-width: 1440px) {
+    --container-padding: 64px;
     max-width: 1440px;
-    padding: 0 64px;
   }
 }
