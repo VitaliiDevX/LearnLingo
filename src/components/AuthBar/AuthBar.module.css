@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
 }
 
 .row {
@@ -17,6 +18,8 @@
   display: block;
   width: 20px;
   height: 20px;
+  color: var(--color-accent);
+  transition: color var(--transition);
 }
 
 .login {
@@ -34,9 +37,14 @@
   line-height: 1.25;
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     color: var(--color-gray-900);
-    background-color: var(--color-gray-100);
+    background-color: var(--color-accent-hover);
+  }
+
+  &:hover .icon,
+  &:focus-visible .icon {
+    color: var(--color-gray-900);
   }
 }
 
@@ -55,12 +63,8 @@
   line-height: 1.25;
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     color: var(--color-gray-900);
     background-color: var(--color-accent-hover);
   }
-}
-
-.icon {
-  color: var(--color-accent);
 }

@@ -1,4 +1,3 @@
-// src/pages/Teachers.tsx
 export default function Teachers() {
   return (
     <div>

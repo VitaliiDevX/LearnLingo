@@ -5,16 +5,16 @@
 
   --color-white: #ffffff;
   --color-gray-50: #f8f8f8;
-  --color-gray-100: #ecebeb;
   --color-gray-400: #8a8a89;
   --color-gray-900: #121417;
 
+  --shadow-color: rgba(0, 0, 0, 0.3);
+
   --color-accent: #f4c550;
-  --color-emphasis: #fbe9ba;
   --color-accent-hover: #ffdc86;
-  --color-accent-active: #dfb13c;
-  --laptop-start: #eeb055;
-  --laptop-end: #d08f38;
+  --color-emphasis: #fbe9ba;
+  --color-laptop-start: #eeb055;
+  --color-laptop-end: #d08f38;
 }
 
 *,

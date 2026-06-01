@@ -25,8 +25,8 @@
   height: 170px;
   background: linear-gradient(
     180deg,
-    var(--laptop-start) 0%,
-    var(--laptop-end) 100%
+    var(--color-laptop-start) 0%,
+    var(--color-laptop-end) 100%
   );
   justify-self: flex-end;
   border-top-left-radius: 8px;
@@ -34,6 +34,8 @@
 }
 
 .appleIcon {
+  opacity: 0.3;
   height: 56px;
   width: 46px;
+  fill: var(--color-white);
 }

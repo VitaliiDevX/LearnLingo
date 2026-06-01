@@ -6,14 +6,14 @@ import Teachers from "./pages/Teachers/Teachers";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />, // Спільний каркас (Header + Outlet)
+    element: <Layout />,
     children: [
       {
-        index: true, // Головна сторінка за замовчуванням (шлях "/")
+        index: true,
         element: <Home />,
       },
       {
-        path: "teachers", // Шлях "/teachers"
+        path: "teachers",
         element: <Teachers />,
       },
     ],
