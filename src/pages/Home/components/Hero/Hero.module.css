@@ -1,6 +1,10 @@
+.section {
+  padding-bottom: 32px;
+}
+
 .gridContainer {
   display: grid;
-  grid-template-columns: 1fr; /* Одна колонка на мобільних */
+  grid-template-columns: 1fr;
   gap: 24px;
 
   @media only screen and (min-width: 1024px) {

@@ -6,7 +6,7 @@ import clsx from "clsx";
 
 export default function Hero() {
   return (
-    <section className={css.heroSection}>
+    <section className={css.section}>
       <div className={clsx(css.gridContainer, "container")}>
         <HeroInfo />
         <HeroImage />

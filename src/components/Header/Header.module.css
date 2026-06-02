@@ -9,7 +9,9 @@
   grid-template-columns: 1fr max-content 1fr;
   align-items: center;
   width: 100%;
-  padding: 0 calc(var(--container-padding) * 2);
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 calc(var(--padding) * 2);
 }
 
 .headerContent > :nth-child(1) {

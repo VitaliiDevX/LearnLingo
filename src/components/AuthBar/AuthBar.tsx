@@ -4,17 +4,22 @@ import clsx from "clsx";
 
 interface Props {
   direction?: "row" | "column";
-  onClick?: () => void;
+  onLoginClick: () => void;
+  onRegisterClick: () => void;
 }
 
-export default function AuthBar({ direction = "row", onClick }: Props) {
+export default function AuthBar({
+  direction = "row",
+  onLoginClick,
+  onRegisterClick,
+}: Props) {
   return (
     <div className={clsx(css.wrapper, css[direction])}>
-      <button onClick={onClick} className={css.login}>
+      <button onClick={onLoginClick} className={css.login}>
         <Icon id="icon-log-in" className={css.icon} />
         Log in
       </button>
-      <button onClick={onClick} className={css.register}>
+      <button onClick={onRegisterClick} className={css.register}>
         Registration
       </button>
     </div>
