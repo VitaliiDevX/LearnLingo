@@ -6,11 +6,16 @@ import NavLinks from "../NavLinks/NavLinks";
 import AuthBar from "../AuthBar/AuthBar";
 import { useState } from "react";
 import Modal from "../Modal/Modal";
+import AuthForm from "../AuthForm/AuthForm";
+import InputField from "../InputField/InputField";
+import { AUTH_CONFIG } from "../../constants/auth";
 
 export default function Header() {
   const [modalType, setModalType] = useState<"login" | "register" | null>(null);
 
   const closeModal = () => setModalType(null);
+
+  const config = modalType ? AUTH_CONFIG[modalType] : null;
 
   return (
     <header className={css.header}>
@@ -28,10 +33,25 @@ export default function Header() {
         </div>
       </div>
 
-      {modalType && (
+      {config && (
         <Modal onClose={closeModal}>
-          {modalType === "login" ? <p>login</p> : <p>register</p>}
-          {/* {modalType === "login" ? <LoginForm /> : <RegisterForm />} */}
+          <AuthForm
+            title={config.title}
+            description={config.description}
+            buttonText={config.button}
+            schema={config.schema}
+            onSubmit={() => {}}
+          >
+            {modalType === "register" && (
+              <InputField name="name" placeholder="Name" />
+            )}
+            <InputField name="email" placeholder="Email" />
+            <InputField
+              name="password"
+              placeholder="Password"
+              type="password"
+            />
+          </AuthForm>
         </Modal>
       )}
     </header>

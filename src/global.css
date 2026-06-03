@@ -8,6 +8,10 @@
   --color-gray-400: #8a8a89;
   --color-gray-900: #121417;
 
+  --color-red: #d8000c;
+
+  --midnight-smoke: rgba(18, 20, 23, 0.8);
+  --border-light: rgba(18, 20, 23, 0.1);
   --shadow-color: rgba(0, 0, 0, 0.3);
 
   --color-accent: #f4c550;
@@ -62,15 +66,6 @@ body {
 ::selection {
   background-color: var(--color-accent);
   color: var(--color-gray-900);
-}
-
-:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
-
-:focus:not(:focus-visible) {
-  outline: none;
 }
 
 /* base reset */

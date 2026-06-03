@@ -1,0 +1,30 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.input {
+  line-height: 1.38;
+  font-weight: 400;
+  width: 100%;
+  padding: 15px 18px;
+  height: 54px;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  transition: border-color var(--transition);
+}
+
+.input:focus {
+  border-color: var(--color-accent);
+}
+
+.inputError {
+  border-color: var(--color-red);
+}
+
+.errorText {
+  color: var(--color-red);
+  font-size: 12px;
+}
