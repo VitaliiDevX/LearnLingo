@@ -3,7 +3,7 @@
 }
 
 .dropdownButton {
-  background: none;
+  background-color: transparent;
   border: none;
   cursor: pointer;
   display: flex;
@@ -14,12 +14,12 @@
     background-color var(--transition),
     color var(--transition);
   color: var(--color-accent);
-}
 
-.dropdownButton:hover,
-.dropdownButton:focus-visible {
-  background-color: var(--color-accent-hover);
-  color: var(--color-gray-900);
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-accent-hover);
+    color: var(--color-gray-900);
+  }
 }
 
 .icon {
@@ -51,11 +51,11 @@
   border: 2px solid transparent;
   padding: 3px;
   transition: border-color var(--transition);
-}
 
-.dropdownItem:hover,
-.dropdownItem:focus-visible {
-  border-color: var(--color-accent-hover);
+  &:hover,
+  &:focus-visible {
+    border-color: var(--color-accent-hover);
+  }
 }
 
 .active {

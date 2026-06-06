@@ -9,6 +9,7 @@ import Modal from "../Modal/Modal";
 import AuthForm from "../AuthForm/AuthForm";
 import InputField from "../InputField/InputField";
 import { AUTH_CONFIG } from "../../constants/auth";
+import { AnimatePresence } from "framer-motion";
 
 export default function Header() {
   const [modalType, setModalType] = useState<"login" | "register" | null>(null);
@@ -32,28 +33,29 @@ export default function Header() {
           />
         </div>
       </div>
-
-      {config && (
-        <Modal onClose={closeModal}>
-          <AuthForm
-            title={config.title}
-            description={config.description}
-            buttonText={config.button}
-            schema={config.schema}
-            onSubmit={() => {}}
-          >
-            {modalType === "register" && (
-              <InputField name="name" placeholder="Name" />
-            )}
-            <InputField name="email" placeholder="Email" />
-            <InputField
-              name="password"
-              placeholder="Password"
-              type="password"
-            />
-          </AuthForm>
-        </Modal>
-      )}
+      <AnimatePresence>
+        {config && (
+          <Modal onClose={closeModal}>
+            <AuthForm
+              title={config.title}
+              description={config.description}
+              buttonText={config.button}
+              schema={config.schema}
+              onSubmit={() => {}}
+            >
+              {modalType === "register" && (
+                <InputField name="name" placeholder="Name" />
+              )}
+              <InputField name="email" placeholder="Email" />
+              <InputField
+                name="password"
+                placeholder="Password"
+                type="password"
+              />
+            </AuthForm>
+          </Modal>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

@@ -1,7 +1,7 @@
 .wrapper {
+  position: relative;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  align-items: center;
   width: 100%;
 }
 
@@ -14,17 +14,43 @@
   border: 1px solid var(--border-light);
   border-radius: 12px;
   transition: border-color var(--transition);
+
+  &:hover,
+  &:focus {
+    border-color: var(--color-accent);
+  }
 }
 
-.input:focus {
-  border-color: var(--color-accent);
+.toggleButton {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-gray-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: color var(--transition);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-accent);
+  }
 }
 
-.inputError {
+.inputError,
+.inputError:hover,
+.inputError:focus {
   border-color: var(--color-red);
 }
 
-.errorText {
-  color: var(--color-red);
-  font-size: 12px;
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--color-white) inset !important;
+  -webkit-text-fill-color: var(--color-gray-900) !important;
+  transition: background-color 5000s ease-in-out 0s;
 }

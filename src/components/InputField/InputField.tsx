@@ -1,6 +1,10 @@
 import { useFormContext } from "react-hook-form";
 import css from "./InputField.module.css";
 import clsx from "clsx";
+import { AnimatePresence } from "framer-motion";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { useRef, useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 interface InputFieldProps {
   name: string;
@@ -13,22 +17,55 @@ export default function InputField({
   placeholder,
   type = "text",
 }: InputFieldProps) {
+  const [showPassword, setShowPassword] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
   const {
     register,
     formState: { errors },
   } = useFormContext();
 
+  const { ref: registerRef, ...rest } = register(name);
+
   const error = errors[name]?.message as string;
+
+  const isPassword = type === "password";
+  const inputType = isPassword ? (showPassword ? "text" : "password") : type;
 
   return (
     <div className={css.wrapper}>
       <input
-        {...register(name)}
-        type={type}
+        {...rest}
+        ref={(e) => {
+          registerRef(e);
+          inputRef.current = e;
+        }}
+        type={inputType}
         placeholder={placeholder}
         className={clsx(css.input, error && css.inputError)}
       />
-      {error && <p className={css.errorText}>{error}</p>}
+      {isPassword && (
+        <button
+          type="button"
+          className={css.toggleButton}
+          onClick={(e) => {
+            e.preventDefault();
+            setShowPassword(!showPassword);
+            setTimeout(() => {
+              const input = inputRef.current;
+              if (input) {
+                input.focus();
+                const length = input.value.length;
+                input.setSelectionRange(length, length);
+              }
+            }, 0);
+          }}
+        >
+          {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+        </button>
+      )}
+      <AnimatePresence mode="wait">
+        {error && <ErrorMessage message={error} />}
+      </AnimatePresence>
     </div>
   );
 }

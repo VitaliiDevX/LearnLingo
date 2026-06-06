@@ -1,6 +1,7 @@
 import { useEffect, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
+import { motion } from "framer-motion";
 import css from "./Modal.module.css";
 
 interface ModalProps {
@@ -35,25 +36,28 @@ export default function Modal({ children, onClose }: ModalProps) {
   if (!modalRoot) return null;
 
   return createPortal(
-    <div
+    <motion.div
       className={css.backdrop}
-      role="dialog"
-      aria-modal="true"
-      aria-label="Modal window"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
       onClick={onClose}
     >
-      <div className={css.modal} onClick={(e) => e.stopPropagation()}>
-        <button
-          className={css.closeButton}
-          onClick={onClose}
-          aria-label="Close modal"
-        >
+      <motion.div
+        className={css.modal}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className={css.closeButton} onClick={onClose}>
           <X size={24} />
         </button>
-
         <div className={css.content}>{children}</div>
-      </div>
-    </div>,
+      </motion.div>
+    </motion.div>,
     modalRoot,
   );
 }

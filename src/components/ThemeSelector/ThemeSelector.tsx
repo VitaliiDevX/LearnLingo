@@ -24,7 +24,11 @@ export default function ThemeSelector() {
 
   return (
     <div className={css.dropdownContainer} ref={dropdownRef}>
-      <button className={css.dropdownButton} onClick={() => setIsOpen(!isOpen)}>
+      <button
+        className={css.dropdownButton}
+        onClick={() => setIsOpen(!isOpen)}
+        title="Select color"
+      >
         <Droplet className={css.icon} />
       </button>
       {isOpen && (
