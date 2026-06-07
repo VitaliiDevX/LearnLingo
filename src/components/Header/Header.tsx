@@ -4,7 +4,7 @@ import css from "./Header.module.css";
 import Logo from "../Logo/Logo";
 import NavLinks from "../NavLinks/NavLinks";
 import AuthBar from "../AuthBar/AuthBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../Modal/Modal";
 import AuthForm from "../AuthForm/AuthForm";
 import InputField from "../InputField/InputField";
@@ -13,14 +13,24 @@ import { AnimatePresence } from "framer-motion";
 
 export default function Header() {
   const [modalType, setModalType] = useState<"login" | "register" | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const closeModal = () => setModalType(null);
 
   const config = modalType ? AUTH_CONFIG[modalType] : null;
 
   return (
-    <header className={css.header}>
-      <div className={clsx(css.headerContent)}>
+    <header className={clsx(css.header, isScrolled && css.headerScrolled)}>
+      <div className={clsx(css.headerContent, "mainContainer")}>
         <Logo />
 
         <NavLinks />

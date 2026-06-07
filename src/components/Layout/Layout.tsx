@@ -6,7 +6,7 @@ export default function Layout() {
   return (
     <div className={css.appContainer}>
       <Header />
-      <main className={css.mainContent}>
+      <main className={css.main}>
         <Outlet />
       </main>
     </div>

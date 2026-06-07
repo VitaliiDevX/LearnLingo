@@ -1,7 +1,17 @@
 .header {
-  width: 100%;
-  background-color: var(--color-white);
+  width: 100vw;
   padding: 20px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: box-shadow var(--transition);
+}
+
+.headerScrolled {
+  box-shadow: 0 4px 12px var(--shadow-light-color);
 }
 
 .headerContent {
@@ -9,9 +19,6 @@
   grid-template-columns: 1fr max-content 1fr;
   align-items: center;
   width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 calc(var(--padding) * 2);
 }
 
 .headerContent > :nth-child(1) {
