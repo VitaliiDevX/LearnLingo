@@ -57,9 +57,9 @@ export const THEMES: ThemePalette[] = [
   {
     id: "lavender",
     name: "Lavender Mist",
-    primary: "#b8a3e0",
-    hover: "#d1c4f5",
-    emphasis: "#c5b9e8",
+    primary: "#a58cd9",
+    hover: "#b9a7db",
+    emphasis: "#c5bbe0",
     laptopStart: "#5a4a8c",
     laptopEnd: "#453675",
   },

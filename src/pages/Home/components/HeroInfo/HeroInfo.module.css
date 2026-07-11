@@ -75,7 +75,7 @@
   line-height: 1.25;
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     background-color: var(--color-accent-hover);
   }
 }

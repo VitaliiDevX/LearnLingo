@@ -19,7 +19,9 @@
   width: auto;
   max-width: 600px;
   padding: var(--padding);
-  margin: var(--padding);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .closeButton {
@@ -40,4 +42,11 @@
   &:focus-visible {
     background-color: var(--color-accent-hover);
   }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 }
