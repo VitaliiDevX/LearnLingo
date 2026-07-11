@@ -1,0 +1,41 @@
+.section {
+  padding: 96px 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.content {
+  text-align: center;
+}
+
+.title {
+  font-size: 120px;
+  line-height: 1.11;
+}
+
+.subtitle {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.text {
+  font-size: 18px;
+  margin-bottom: 32px;
+  color: var(--color-gray-400);
+}
+
+.button {
+  display: inline-block;
+  padding: 16px 48px;
+  background-color: var(--color-accent);
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: background-color var(--transition);
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-accent-hover);
+  }
+}
