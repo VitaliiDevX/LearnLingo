@@ -1,0 +1,29 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  padding: 16px 48px;
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    transform 0.1s ease;
+  user-select: none;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-accent-hover);
+  }
+}
+
+.buttonText {
+  display: inline-flex;
+  align-items: baseline;
+}
