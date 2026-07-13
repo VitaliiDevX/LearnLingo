@@ -1,9 +1,15 @@
 import { motion } from "framer-motion";
-import css from "./ErrorMessage.module.css";
+import css from "./ValidationErrorMessage.module.css";
 
-export default function ErrorMessage({ message }: { message: string }) {
+interface Props {
+  message: string;
+  id?: string;
+}
+
+export default function ValidationErrorMessage({ message, id }: Props) {
   return (
     <motion.span
+      id={id}
       className={css.errorText}
       initial={{ opacity: 0, y: -5 }}
       animate={{ opacity: 1, y: 0 }}

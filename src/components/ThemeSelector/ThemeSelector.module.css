@@ -22,8 +22,15 @@
   }
 }
 
+.active {
+  background-color: var(--color-accent-hover);
+  color: var(--color-gray-900);
+  pointer-events: none;
+  cursor: default;
+}
+
 .icon {
-  size: 24px;
+  stroke-width: 2;
 }
 
 .dropdownList {

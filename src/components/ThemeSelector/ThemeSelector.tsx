@@ -25,11 +25,11 @@ export default function ThemeSelector() {
   return (
     <div className={css.dropdownContainer} ref={dropdownRef}>
       <button
-        className={css.dropdownButton}
+        className={clsx(css.dropdownButton, isOpen && css.active)}
         onClick={() => setIsOpen(!isOpen)}
         title="Select color"
       >
-        <Droplet className={css.icon} />
+        <Droplet size={24} className={css.icon} />
       </button>
       {isOpen && (
         <ul className={css.dropdownList}>

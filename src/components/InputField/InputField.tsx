@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 import css from "./InputField.module.css";
 import clsx from "clsx";
 import { AnimatePresence } from "framer-motion";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import ValidationErrorMessage from "../ValidationErrorMessage/ValidationErrorMessage";
 import { useRef, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
@@ -27,14 +27,21 @@ export default function InputField({
   const { ref: registerRef, ...rest } = register(name);
 
   const error = errors[name]?.message as string;
+  const errorId = `${name}-error`;
 
   const isPassword = type === "password";
   const inputType = isPassword ? (showPassword ? "text" : "password") : type;
 
   return (
     <div className={css.wrapper}>
+      <label htmlFor={name} className="visually-hidden">
+        {placeholder}
+      </label>
       <input
         {...rest}
+        id={name}
+        aria-invalid={!!error}
+        aria-describedby={error ? errorId : undefined}
         ref={(e) => {
           registerRef(e);
           inputRef.current = e;
@@ -64,7 +71,7 @@ export default function InputField({
         </button>
       )}
       <AnimatePresence mode="wait">
-        {error && <ErrorMessage message={error} />}
+        {error && <ValidationErrorMessage message={error} id={errorId} />}
       </AnimatePresence>
     </div>
   );

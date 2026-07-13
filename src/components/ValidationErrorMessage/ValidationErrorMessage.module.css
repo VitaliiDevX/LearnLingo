@@ -1,5 +1,5 @@
 .errorText {
-  bottom: -18px;
+  bottom: 0px;
   position: absolute;
   color: var(--color-red);
   font-size: 12px;
