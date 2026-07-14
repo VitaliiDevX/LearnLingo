@@ -1,0 +1,19 @@
+.teacherInfoWrapper {
+  display: flex;
+  align-self: flex-start;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+
+.label {
+  color: var(--color-gray-400);
+  font-size: 12px;
+  line-height: 1.33;
+}
+
+.textInfo {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
