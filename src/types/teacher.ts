@@ -5,7 +5,7 @@ export interface Review {
 }
 
 export interface Teacher {
-  id: string;
+  _id: string;
   name: string;
   surname: string;
   languages: string[];
@@ -18,4 +18,33 @@ export interface Teacher {
   lesson_info: string;
   conditions: string[];
   experience: string;
+}
+
+export interface PaginatedTeachers {
+  page: number;
+  perPage: number;
+  totalItems: number;
+  totalPages: number;
+  teachers: Teacher[];
+}
+
+export interface GetTeachersParams {
+  page?: number;
+  perPage?: number;
+  language?: string;
+  level?: string;
+  price?: number;
+}
+
+export interface GetFavoritesParams {
+  page?: number;
+  perPage?: number;
+}
+
+export interface FavoriteActionResponse {
+  message: string;
+}
+
+export interface FavoriteActionParams {
+  teacherId: string;
 }
