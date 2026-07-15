@@ -1,19 +1,33 @@
 import clsx from "clsx";
-import ThemeSelector from "../ThemeSelector/ThemeSelector";
+import { useEffect, useState } from "react";
+import type { FieldValues } from "react-hook-form";
+import { AnimatePresence } from "framer-motion";
 import css from "./Header.module.css";
+import ThemeSelector from "../ThemeSelector/ThemeSelector";
 import Logo from "../Logo/Logo";
 import NavLinks from "../NavLinks/NavLinks";
+import AuthBarSkeleton from "../AuthBarSkeleton/AuthBarSkeleton";
 import AuthBar from "../AuthBar/AuthBar";
-import { useEffect, useState } from "react";
+import UserBar from "../UserBar/UserBar";
 import Modal from "../Modal/Modal";
-import AuthForm from "../AuthForm/AuthForm";
-import InputField from "../InputField/InputField";
-import { AUTH_CONFIG } from "../../constants/auth";
-import { AnimatePresence } from "framer-motion";
+import ModalForm from "../ModalForm/ModalForm";
+import LoginForm from "../LoginForm/LoginForm";
+import RegisterForm from "../RegisterForm/RegisterForm";
+import { useAuthStore } from "../../store/useAuthStore";
+import type { LoginValues, RegisterValues } from "../../types/auth";
+import { FORMS_CONFIG, type FormType } from "../../constants/forms";
+import { useAuth } from "../../lib/hooks/useAuth";
 
 export default function Header() {
-  const [modalType, setModalType] = useState<"login" | "register" | null>(null);
+  const [modalType, setModalType] = useState<FormType | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const isInitializing = useAuthStore((state) => state.isInitializing);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  const { login, isLoggingIn, register, isRegistering } = useAuth();
+
+  const isLoading = isLoggingIn || isRegistering;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +40,15 @@ export default function Header() {
 
   const closeModal = () => setModalType(null);
 
-  const config = modalType ? AUTH_CONFIG[modalType] : null;
+  const handleAuthSubmit = async (data: FieldValues) => {
+    if (modalType === "login") {
+      login(data as LoginValues, { onSuccess: closeModal });
+    } else if (modalType === "register") {
+      register(data as RegisterValues, { onSuccess: closeModal });
+    }
+  };
+
+  const config = modalType ? FORMS_CONFIG[modalType] : null;
 
   return (
     <header className={clsx(css.header, isScrolled && css.headerScrolled)}>
@@ -37,32 +59,28 @@ export default function Header() {
 
         <div className={css.authButtons}>
           <ThemeSelector />
-          <AuthBar
-            onLoginClick={() => setModalType("login")}
-            onRegisterClick={() => setModalType("register")}
-          />
+          {isInitializing ? (
+            <AuthBarSkeleton />
+          ) : isAuthenticated ? (
+            <UserBar />
+          ) : (
+            <AuthBar
+              onLoginClick={() => setModalType("login")}
+              onRegisterClick={() => setModalType("register")}
+            />
+          )}
         </div>
       </div>
       <AnimatePresence>
         {config && (
           <Modal onClose={closeModal}>
-            <AuthForm
-              title={config.title}
-              description={config.description}
-              buttonText={config.button}
-              schema={config.schema}
-              onSubmit={() => {}}
+            <ModalForm
+              {...config}
+              isLoading={isLoading}
+              onSubmit={handleAuthSubmit}
             >
-              {modalType === "register" && (
-                <InputField name="name" placeholder="Name" />
-              )}
-              <InputField name="email" placeholder="Email" />
-              <InputField
-                name="password"
-                placeholder="Password"
-                type="password"
-              />
-            </AuthForm>
+              {modalType === "login" ? <LoginForm /> : <RegisterForm />}
+            </ModalForm>
           </Modal>
         )}
       </AnimatePresence>
