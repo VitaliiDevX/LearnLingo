@@ -1,0 +1,73 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.userName {
+  font-weight: 700;
+  color: var(--color-gray-900);
+}
+
+.iconHeart {
+  stroke-width: 2;
+}
+
+.iconLogout {
+  display: block;
+  color: var(--color-accent);
+  transition: color var(--transition);
+  stroke-width: 2;
+}
+
+.favButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  padding: 12px;
+  transition:
+    background-color var(--transition),
+    color var(--transition);
+  color: var(--color-accent);
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-accent-hover);
+    color: var(--color-gray-900);
+  }
+}
+
+.active {
+  background-color: var(--color-accent-hover);
+  color: var(--color-gray-900);
+  pointer-events: none;
+  cursor: default;
+}
+
+.logout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  min-width: 105px;
+  transition: background-color var(--transition);
+
+  font-weight: 700;
+  line-height: 1.25;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-accent-hover);
+  }
+
+  &:hover .iconLogout,
+  &:focus-visible .iconLogout {
+    color: var(--color-gray-900);
+  }
+}
