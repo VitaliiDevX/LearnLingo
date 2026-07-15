@@ -76,11 +76,32 @@
 }
 
 .iconHeart {
+  stroke-width: 2;
+}
+
+.favButton {
   position: absolute;
   top: 24px;
   right: 24px;
-  width: 26px;
-  height: 26px;
+  display: flex;
+  align-items: center;
+  transition: color var(--transition);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-accent-hover);
+  }
+}
+
+.isFavorite .iconHeart {
+  fill: var(--color-accent);
+  color: var(--color-accent);
+
+  &:hover,
+  &:focus-visible {
+    fill: var(--color-accent-hover);
+    color: var(--color-accent-hover);
+  }
 }
 
 .title {
@@ -94,7 +115,6 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 16px;
 }
 
 .languagesList {
@@ -111,6 +131,19 @@
   font-weight: 500;
   text-decoration: underline;
   text-decoration-skip-ink: none;
+
+  transition: color var(--transition);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-accent-hover);
+  }
+}
+
+.langTag:disabled {
+  color: var(--color-accent);
+  text-decoration: none;
+  cursor: text;
 }
 
 .icon {
@@ -118,16 +151,29 @@
   height: 16px;
 }
 
+.motionWrapper {
+  overflow: hidden;
+}
+
 .readMoreButton {
   font-weight: 500;
   line-height: 1.5;
   text-decoration: underline;
   text-decoration-skip-ink: none;
+  margin-top: 16px;
+
+  transition: color var(--transition);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-accent-hover);
+  }
 }
 
 .experience {
   font-weight: 400;
   margin-bottom: 32px;
+  margin-top: 16px;
 }
 
 .reviewList {
@@ -188,9 +234,24 @@
   padding: 8px 12px;
   border: 1px solid var(--border-semi);
   border-radius: 35px;
+  transition:
+    background-color var(--transition),
+    border var(--transition);
 
+  font-weight: 500;
   font-size: 14px;
-  line-height: 1.14;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-accent-hover);
+    border: 1px solid var(--color-accent-hover);
+  }
+
+  &:disabled {
+    background-color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    cursor: text;
+  }
 }
 
 .bookButton {
