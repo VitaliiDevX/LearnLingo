@@ -48,7 +48,7 @@ export default function TeacherCard({ teacher }: Props) {
       setModalType("authRequired");
       return;
     }
-    toggleFavorite(teacher._id);
+    toggleFavorite({ teacherId: teacher._id, isFavorite });
   };
 
   const closeModal = () => setModalType(null);
