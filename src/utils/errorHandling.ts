@@ -1,26 +1,37 @@
 import { isAxiosError } from "axios";
+import { errorMessages } from "../constants/errorMessages";
 
 export const getErrorMessage = (error: unknown): string => {
   if (isAxiosError(error)) {
-    const status = error.response?.status;
+    const backendMessage = error.response?.data?.message;
 
-    switch (status) {
-      case 401:
-        return "Session expired. Please login again.";
-      case 403:
-        return "You do not have permission to view this resource.";
-      case 500:
-      case 502:
-      case 503:
-        return "Server is temporarily unavailable. Please try again later.";
-      default:
-        return error.response?.data?.message || "An unexpected error occurred.";
+    if (typeof backendMessage === "string" && errorMessages[backendMessage]) {
+      return errorMessages[backendMessage];
     }
+
+    if (typeof backendMessage === "string") {
+      return backendMessage;
+    }
+
+    return getStatusMessage(error.response?.status);
   }
 
-  if (error instanceof Error) {
-    return error.message;
-  }
+  return error instanceof Error
+    ? error.message
+    : "An unexpected error occurred.";
+};
 
-  return "An unexpected error occurred. Please try again.";
+const getStatusMessage = (status?: number): string => {
+  switch (status) {
+    case 401:
+      return "Unauthorized. Please log in.";
+    case 403:
+      return "Forbidden. You don't have access.";
+    case 404:
+      return "Resource not found.";
+    case 500:
+      return "Server error. Please try again later.";
+    default:
+      return "An unexpected error occurred.";
+  }
 };
