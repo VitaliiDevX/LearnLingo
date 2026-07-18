@@ -96,6 +96,9 @@
 .isFavorite .iconHeart {
   fill: var(--color-accent);
   color: var(--color-accent);
+  transition:
+    fill var(--transition),
+    color var(--transition);
 
   &:hover,
   &:focus-visible {

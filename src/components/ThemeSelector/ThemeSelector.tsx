@@ -38,7 +38,7 @@ export default function ThemeSelector() {
               key={theme.id}
               className={clsx(
                 css.dropdownItem,
-                currentTheme.id === theme.id && css.active,
+                currentTheme.id === theme.id && css.activeColor,
               )}
             >
               <button

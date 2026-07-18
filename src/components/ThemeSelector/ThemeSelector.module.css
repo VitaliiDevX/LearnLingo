@@ -65,7 +65,7 @@
   }
 }
 
-.active {
+.activeColor {
   border-color: var(--color-accent);
 }
 
