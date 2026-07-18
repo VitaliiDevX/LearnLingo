@@ -1,25 +1,29 @@
 import { useEffect } from "react";
 import { useAuthStore } from "../../store/useAuthStore";
-import { useUser } from "../../lib/hooks/useUser";
+import { getUserProfile } from "../../lib/services/user";
 
 interface Props {
   children: React.ReactNode;
 }
 
-export const AuthProvider = ({ children }: Props) => {
-  const { data: user, isLoading, isError } = useUser();
+export function AuthProvider({ children }: Props) {
   const setUser = useAuthStore((state) => state.setUser);
-  const logoutUser = useAuthStore((state) => state.logout);
-  const setInitialized = useAuthStore((state) => state.setInitialized);
+  const clearIsAuthenticated = useAuthStore(
+    (state) => state.clearIsAuthenticated,
+  );
 
   useEffect(() => {
-    if (!isLoading) {
-      if (user) setUser(user);
-      else if (isError) logoutUser();
+    const fetchUser = async () => {
+      try {
+        const user = await getUserProfile();
+        setUser(user);
+      } catch {
+        clearIsAuthenticated();
+      }
+    };
 
-      setInitialized();
-    }
-  }, [user, isLoading, isError, setUser, logoutUser, setInitialized]);
+    fetchUser();
+  }, [setUser, clearIsAuthenticated]);
 
   return children;
-};
+}
