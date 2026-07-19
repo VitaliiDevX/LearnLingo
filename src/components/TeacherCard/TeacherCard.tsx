@@ -223,32 +223,28 @@ export default function TeacherCard({ teacher }: Props) {
           )}
         </AnimatePresence>
       </div>
-      <AnimatePresence>
-        {modalType && (
-          <Modal onClose={closeModal}>
-            {textConfig ? (
-              <InfoModal
-                title={textConfig.title}
-                description={textConfig.description}
-                primaryAction={{
-                  label: "Log in",
-                  onClick: () => setModalType("login"),
-                }}
-                secondaryAction={{
-                  label: "Registration",
-                  onClick: () => setModalType("register"),
-                }}
-              />
-            ) : formConfig ? (
-              <ModalForm {...formConfig} onSubmit={(data) => console.log(data)}>
-                {modalType === "booking" && <BookingForm teacher={teacher} />}
-                {modalType === "login" && <LoginForm />}
-                {modalType === "register" && <RegisterForm />}
-              </ModalForm>
-            ) : null}
-          </Modal>
-        )}
-      </AnimatePresence>
+      <Modal isOpen={!!modalType} onClose={closeModal}>
+        {textConfig ? (
+          <InfoModal
+            title={textConfig.title}
+            description={textConfig.description}
+            primaryAction={{
+              label: "Log in",
+              onClick: () => setModalType("login"),
+            }}
+            secondaryAction={{
+              label: "Registration",
+              onClick: () => setModalType("register"),
+            }}
+          />
+        ) : formConfig ? (
+          <ModalForm {...formConfig} onSubmit={(data) => console.log(data)}>
+            {modalType === "booking" && <BookingForm teacher={teacher} />}
+            {modalType === "login" && <LoginForm />}
+            {modalType === "register" && <RegisterForm />}
+          </ModalForm>
+        ) : null}
+      </Modal>
     </div>
   );
 }

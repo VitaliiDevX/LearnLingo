@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import type { FieldValues } from "react-hook-form";
-import { AnimatePresence } from "framer-motion";
 import css from "./Header.module.css";
 import ThemeSelector from "../ThemeSelector/ThemeSelector";
 import Logo from "../Logo/Logo";
@@ -71,19 +70,17 @@ export default function Header() {
           )}
         </div>
       </div>
-      <AnimatePresence>
+      <Modal isOpen={!!config} onClose={closeModal}>
         {config && (
-          <Modal onClose={closeModal}>
-            <ModalForm
-              {...config}
-              isLoading={isLoading}
-              onSubmit={handleAuthSubmit}
-            >
-              {modalType === "login" ? <LoginForm /> : <RegisterForm />}
-            </ModalForm>
-          </Modal>
+          <ModalForm
+            {...config}
+            isLoading={isLoading}
+            onSubmit={handleAuthSubmit}
+          >
+            {modalType === "login" ? <LoginForm /> : <RegisterForm />}
+          </ModalForm>
         )}
-      </AnimatePresence>
+      </Modal>
     </header>
   );
 }
