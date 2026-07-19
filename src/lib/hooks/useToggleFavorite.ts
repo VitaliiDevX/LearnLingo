@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { useAuthStore } from "../../store/useAuthStore";
 import { addToFavorites, removeFromFavorites } from "../services/teachers";
 import { getErrorMessage } from "../../utils/errorHandling";
-import type { FavoriteActionResponse } from "../../types/teacher";
+import type { FavoriteResponse } from "../../types/teacher";
 
 interface ToggleFavoriteParams {
   teacherId: string;
@@ -14,7 +14,7 @@ export const useToggleFavorite = () => {
   const { user, setUser } = useAuthStore();
   const queryClient = useQueryClient();
 
-  return useMutation<FavoriteActionResponse, Error, ToggleFavoriteParams>({
+  return useMutation<FavoriteResponse, Error, ToggleFavoriteParams>({
     mutationFn: async ({ teacherId, isFavorite }: ToggleFavoriteParams) => {
       return isFavorite
         ? await removeFromFavorites({ teacherId })

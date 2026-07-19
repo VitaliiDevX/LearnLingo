@@ -1,6 +1,6 @@
 import type {
-  FavoriteActionParams,
-  FavoriteActionResponse,
+  FavoriteParams,
+  FavoriteResponse,
   GetFavoritesParams,
   GetTeachersParams,
   PaginatedTeachers,
@@ -38,8 +38,8 @@ export const getFavoriteTeachers = async (
 
 export const addToFavorites = async ({
   teacherId,
-}: FavoriteActionParams): Promise<FavoriteActionResponse> => {
-  const { data } = await api.post<FavoriteActionResponse>(
+}: FavoriteParams): Promise<FavoriteResponse> => {
+  const { data } = await api.post<FavoriteResponse>(
     `/users/favorites/${teacherId}`,
   );
   return data;
@@ -47,8 +47,8 @@ export const addToFavorites = async ({
 
 export const removeFromFavorites = async ({
   teacherId,
-}: FavoriteActionParams): Promise<FavoriteActionResponse> => {
-  const { data } = await api.delete<FavoriteActionResponse>(
+}: FavoriteParams): Promise<FavoriteResponse> => {
+  const { data } = await api.delete<FavoriteResponse>(
     `/users/favorites/${teacherId}`,
   );
   return data;

@@ -41,10 +41,10 @@ export interface GetFavoritesParams {
   perPage?: number;
 }
 
-export interface FavoriteActionResponse {
+export interface FavoriteResponse {
   message: string;
 }
 
-export interface FavoriteActionParams {
+export interface FavoriteParams {
   teacherId: string;
 }
