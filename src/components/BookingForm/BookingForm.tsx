@@ -1,15 +1,28 @@
+import { useFormContext } from "react-hook-form";
 import { BOOKING_OPTIONS } from "../../constants/forms";
+import { useAuthStore } from "../../store/useAuthStore";
 import type { Teacher } from "../../types/teacher";
 import Avatar from "../Avatar/Avatar";
 import InputField from "../InputField/InputField";
 import RadioGroup from "../RadioGroup/RadioGroup";
 import css from "./BookingForm.module.css";
+import { useEffect } from "react";
 
 interface Props {
   teacher: Teacher;
 }
 
 export default function BookingForm({ teacher }: Props) {
+  const { user } = useAuthStore();
+  const { setValue } = useFormContext();
+
+  useEffect(() => {
+    if (user) {
+      setValue("name", user.name);
+      setValue("email", user.email);
+    }
+  }, [user, setValue]);
+
   return (
     <>
       <div className={css.teacherInfoWrapper}>
@@ -31,7 +44,11 @@ export default function BookingForm({ teacher }: Props) {
       />
       <InputField name="name" placeholder="Name" />
       <InputField name="email" placeholder="Email" />
-      <InputField name="phone" placeholder="Phone number" />
+      <InputField
+        name="phone"
+        placeholder="+## (###) ### ## ##"
+        mask="+## (###) ### ## ##"
+      />
     </>
   );
 }
