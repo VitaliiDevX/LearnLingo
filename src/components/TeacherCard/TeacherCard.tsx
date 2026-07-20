@@ -17,6 +17,11 @@ import LoginForm from "../LoginForm/LoginForm";
 import RegisterForm from "../RegisterForm/RegisterForm";
 import clsx from "clsx";
 import { useToggleFavorite } from "../../lib/hooks/useToggleFavorite";
+import type { FieldValues } from "react-hook-form";
+import type { LoginValues, RegisterValues } from "../../types/auth";
+import { useAuth } from "../../lib/hooks/useAuth";
+import { useBooking } from "../../lib/hooks/useBooking";
+import type { BookingValues } from "../../types/booking";
 
 interface Props {
   teacher: Teacher;
@@ -26,6 +31,8 @@ export default function TeacherCard({ teacher }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [modalType, setModalType] = useState<FormType | ModalType | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  const { login, isLoggingIn, register, isRegistering } = useAuth();
+  const { book, isBooking } = useBooking();
 
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const user = useAuthStore((state) => state.user);
@@ -37,21 +44,7 @@ export default function TeacherCard({ teacher }: Props) {
 
   const isFavorite = user?.favorite_teachers.includes(teacher._id) ?? false;
 
-  const updateFilter = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams);
-    params.set(key, value);
-    setSearchParams(params);
-  };
-
-  const handleToggleFavorite = () => {
-    if (!isAuthenticated) {
-      setModalType("authRequired");
-      return;
-    }
-    toggleFavorite({ teacherId: teacher._id, isFavorite });
-  };
-
-  const closeModal = () => setModalType(null);
+  const isLoading = isLoggingIn || isRegistering || isBooking;
 
   const teacherMeta = [
     { label: "Lessons online", value: null, iconId: "icon-open-book" },
@@ -79,6 +72,39 @@ export default function TeacherCard({ teacher }: Props) {
     modalType && modalType in MODAL_TEXTS
       ? MODAL_TEXTS[modalType as ModalType]
       : null;
+
+  const updateFilter = (key: string, value: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set(key, value);
+    setSearchParams(params);
+  };
+
+  const handleToggleFavorite = () => {
+    if (!isAuthenticated) {
+      setModalType("authRequired");
+      return;
+    }
+    toggleFavorite({ teacherId: teacher._id, isFavorite });
+  };
+
+  const handleSubmit = async (data: FieldValues) => {
+    if (modalType === "login") {
+      login(data as LoginValues, { onSuccess: closeModal });
+    } else if (modalType === "register") {
+      register(data as RegisterValues, { onSuccess: closeModal });
+    } else if (modalType === "booking") {
+      book(
+        {
+          ...data,
+          isTrial: true,
+          teacherId: teacher._id,
+        } as BookingValues,
+        { onSuccess: closeModal },
+      );
+    }
+  };
+
+  const closeModal = () => setModalType(null);
 
   return (
     <div className={css.card}>
@@ -238,7 +264,11 @@ export default function TeacherCard({ teacher }: Props) {
             }}
           />
         ) : formConfig ? (
-          <ModalForm {...formConfig} onSubmit={(data) => console.log(data)}>
+          <ModalForm
+            {...formConfig}
+            isLoading={isLoading}
+            onSubmit={handleSubmit}
+          >
             {modalType === "booking" && <BookingForm teacher={teacher} />}
             {modalType === "login" && <LoginForm />}
             {modalType === "register" && <RegisterForm />}
