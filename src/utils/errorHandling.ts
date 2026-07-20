@@ -23,12 +23,16 @@ export const getErrorMessage = (error: unknown): string => {
 
 const getStatusMessage = (status?: number): string => {
   switch (status) {
+    case 400:
+      return "Bad request. Please check your data.";
     case 401:
       return "Unauthorized. Please log in.";
     case 403:
       return "Forbidden. You don't have access.";
     case 404:
       return "Resource not found.";
+    case 409:
+      return "Conflict. This resource already exists or is unavailable.";
     case 500:
       return "Server error. Please try again later.";
     default:

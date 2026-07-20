@@ -5,4 +5,5 @@ export const errorMessages: Record<string, string> = {
   "Session not found": "Session not found. Please log in again.",
   "Missing session credentials": "Please log in to continue.",
   "User not found": "User account could not be found.",
+  "Trial lesson already booked": "Trial lesson already booked for this teacher",
 };
