@@ -36,6 +36,6 @@ export const bookingSchema = yup.object({
     .string()
     .trim()
     .required("Phone number is required")
-    .matches(/^\+?\d{10,15}$/, "Invalid phone number"),
+    .matches(/^\d{12}$/, "Invalid phone number"),
   reason: yup.string().required("Please select a reason"),
 });
