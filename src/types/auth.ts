@@ -8,10 +8,3 @@ export interface LoginValues extends FieldValues {
 export interface RegisterValues extends LoginValues {
   name: string;
 }
-
-export interface BookingValues extends FieldValues {
-  reason: string;
-  name: string;
-  email: string;
-  phone: string;
-}

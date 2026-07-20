@@ -5,7 +5,8 @@ import {
 } from "../schemas/validationSchemas";
 import { ObjectSchema, type AnyObject } from "yup";
 import type { Teacher } from "../types/teacher";
-import type { BookingValues, LoginValues, RegisterValues } from "../types/auth";
+import type { LoginValues, RegisterValues } from "../types/auth";
+import type { BookingValues } from "../types/booking";
 
 export interface RadioOption {
   label: string;
@@ -77,6 +78,7 @@ export const FORMS_CONFIG: Record<string, FormConfig> = {
       name: "",
       email: "",
       phone: "",
+      teacherId: "",
     },
   },
 } as const;
