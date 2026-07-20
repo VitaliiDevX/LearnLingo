@@ -1,4 +1,5 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext, Controller } from "react-hook-form";
+import { PatternFormat } from "react-number-format";
 import css from "./InputField.module.css";
 import clsx from "clsx";
 import { AnimatePresence } from "framer-motion";
@@ -9,22 +10,22 @@ import { Eye, EyeOff } from "lucide-react";
 interface InputFieldProps {
   name: string;
   placeholder: string;
-  type?: string;
+  type?: "text" | "password";
+  mask?: string;
 }
 
 export default function InputField({
   name,
   placeholder,
   type = "text",
+  mask,
 }: InputFieldProps) {
   const [showPassword, setShowPassword] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const {
-    register,
+    control,
     formState: { errors },
   } = useFormContext();
-
-  const { ref: registerRef, ...rest } = register(name);
 
   const error = errors[name]?.message as string;
   const errorId = `${name}-error`;
@@ -37,18 +38,44 @@ export default function InputField({
       <label htmlFor={name} className="visually-hidden">
         {placeholder}
       </label>
-      <input
-        {...rest}
-        id={name}
-        aria-invalid={!!error}
-        aria-describedby={error ? errorId : undefined}
-        ref={(e) => {
-          registerRef(e);
-          inputRef.current = e;
+      <Controller
+        name={name}
+        control={control}
+        render={({ field: { onChange, onBlur, value, ref } }) => {
+          const commonProps = {
+            id: name,
+            "aria-invalid": !!error,
+            "aria-describedby": error ? errorId : undefined,
+            className: clsx(css.input, error && css.inputError),
+            placeholder: placeholder,
+            onBlur: onBlur,
+          };
+
+          const handleRef = (el: HTMLInputElement | null) => {
+            ref(el);
+            inputRef.current = el;
+          };
+
+          return mask ? (
+            <PatternFormat
+              {...commonProps}
+              format={mask}
+              mask="_"
+              value={value || ""}
+              onValueChange={(values) => onChange(values.value)}
+              type="text"
+              getInputRef={handleRef}
+            />
+          ) : (
+            <input
+              {...commonProps}
+              onChange={onChange}
+              value={value || ""}
+              type={inputType}
+              ref={handleRef}
+            />
+          );
         }}
-        type={inputType}
-        placeholder={placeholder}
-        className={clsx(css.input, error && css.inputError)}
       />
       {isPassword && (
         <button
