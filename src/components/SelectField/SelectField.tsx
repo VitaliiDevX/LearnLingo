@@ -26,18 +26,20 @@ export default function SelectField({
       className={css.wrapper}
       style={{ "--field-width": width } as React.CSSProperties}
     >
-      <label className={css.label}>{label}</label>
       <Select.Root
         value={value || ""}
         onValueChange={onChange}
         disabled={disabled}
       >
-        <Select.Trigger className={css.trigger}>
-          <Select.Value placeholder={placeholder} />
-          <Select.Icon className={css.iconContainer}>
-            <Icon id="icon-chevron" className={css.icon} />
-          </Select.Icon>
-        </Select.Trigger>
+        <label className={css.labelWrapper}>
+          <span className={css.labelText}>{label}</span>
+          <Select.Trigger className={css.trigger}>
+            <Select.Value placeholder={placeholder} />
+            <Select.Icon className={css.iconContainer}>
+              <Icon id="icon-chevron" className={css.icon} />
+            </Select.Icon>
+          </Select.Trigger>
+        </label>
 
         <Select.Portal>
           <Select.Content

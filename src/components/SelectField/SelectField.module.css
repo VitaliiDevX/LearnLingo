@@ -1,11 +1,14 @@
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
   width: var(--field-width, 100%);
 }
 
-.label {
+.labelWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.labelText {
   font-size: 14px;
   color: var(--color-gray-400);
 }

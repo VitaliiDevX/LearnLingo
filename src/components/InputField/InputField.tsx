@@ -12,6 +12,7 @@ interface InputFieldProps {
   placeholder: string;
   type?: "text" | "password";
   mask?: string;
+  autoComplete?: string;
 }
 
 export default function InputField({
@@ -19,6 +20,7 @@ export default function InputField({
   placeholder,
   type = "text",
   mask,
+  autoComplete,
 }: InputFieldProps) {
   const [showPassword, setShowPassword] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -49,6 +51,7 @@ export default function InputField({
             className: clsx(css.input, error && css.inputError),
             placeholder: placeholder,
             onBlur: onBlur,
+            autoComplete: autoComplete || name,
           };
 
           const handleRef = (el: HTMLInputElement | null) => {

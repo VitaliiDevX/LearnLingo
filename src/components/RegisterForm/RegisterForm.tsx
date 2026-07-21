@@ -5,7 +5,12 @@ export default function RegisterForm() {
     <>
       <InputField name="name" placeholder="Name" />
       <InputField name="email" placeholder="Email" />
-      <InputField name="password" placeholder="Password" type="password" />
+      <InputField
+        name="password"
+        placeholder="Password"
+        type="password"
+        autoComplete="new-password"
+      />
     </>
   );
 }
