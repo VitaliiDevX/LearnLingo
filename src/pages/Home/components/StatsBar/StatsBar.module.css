@@ -1,23 +1,25 @@
 .wrapper {
+  background-color: #000;
   width: 100%;
   border: 1.5px dashed var(--color-accent);
   border-radius: 30px;
-  padding: 40px;
+  padding: 40px clamp(24px, calc(24px + (40 * (100vw - 320px)) / 1120), 64px);
 }
 
 .statsList {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 100px;
+  gap: 40px 60px;
 }
 
 .statCard {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 16px;
+  width: 100%;
 }
 
 .statValue {
