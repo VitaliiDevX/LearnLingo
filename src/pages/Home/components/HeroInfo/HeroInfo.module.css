@@ -6,7 +6,7 @@
   background-color: var(--color-gray-50);
   border-radius: 30px;
   min-height: 530px;
-  padding: 32px 64px;
+  padding: 32px clamp(24px, calc(24px + (40 * (100vw - 320px)) / 1120), 64px);
 
   @media only screen and (min-width: 1024px) {
     width: 50vw;
@@ -64,8 +64,9 @@
   align-self: self-start;
   background-color: var(--color-accent);
   border-radius: 12px;
-  padding: 16px 88px;
-  min-width: 267px;
+  padding: 16px 32px;
+  width: 100%;
+
   min-height: 60px;
   flex-shrink: 0;
   transition: background-color var(--transition);
@@ -73,6 +74,10 @@
   font-size: 16px;
   font-weight: 700;
   line-height: 1.25;
+
+  @media only screen and (min-width: 480px) {
+    max-width: 267px;
+  }
 
   &:hover,
   &:focus-visible {
