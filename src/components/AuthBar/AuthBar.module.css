@@ -12,14 +12,17 @@
 .column {
   flex-direction: column;
   width: 100%;
+
+  .login,
+  .register {
+    width: 100%;
+  }
 }
 
 .icon {
   display: block;
-  width: 20px;
-  height: 20px;
-  color: var(--color-accent);
   transition: color var(--transition);
+  stroke-width: 2;
 }
 
 .login {
@@ -31,6 +34,7 @@
   border-radius: 12px;
   padding: 14px 16px;
   min-width: 105px;
+  background-color: var(--color-accent);
   transition: background-color var(--transition);
 
   font-weight: 700;
@@ -48,10 +52,15 @@
 }
 
 .register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
   background-color: var(--color-gray-900);
   border-radius: 12px;
   padding: 14px 39px;
-  min-width: 166px;
+  min-width: 194px;
   flex-shrink: 0;
   transition:
     background-color var(--transition),

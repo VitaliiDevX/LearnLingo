@@ -1,4 +1,4 @@
-import Icon from "../Icon/Icon";
+import { LogIn, UserPlus } from "lucide-react";
 import css from "./AuthBar.module.css";
 import clsx from "clsx";
 
@@ -16,10 +16,11 @@ export default function AuthBar({
   return (
     <div className={clsx(css.wrapper, css[direction])}>
       <button onClick={onLoginClick} className={css.login}>
-        <Icon id="icon-log-in" className={css.icon} />
+        <LogIn size={20} className={css.icon} />
         Log in
       </button>
       <button onClick={onRegisterClick} className={css.register}>
+        <UserPlus size={20} className={css.icon} />
         Registration
       </button>
     </div>
