@@ -6,6 +6,7 @@ import UserBar from "../UserBar/UserBar";
 import BurgerMenuBtn from "../BurgerMenuBtn/BurgerMenuBtn";
 import { useAuthStore } from "../../store/useAuthStore";
 import type { FormType } from "../../constants/forms";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Props {
   onOpenModal: (type: FormType) => void;
@@ -53,27 +54,35 @@ export default function BurgerMenu({ onOpenModal }: Props) {
     <div className={css.dropdownContainer} ref={menuRef}>
       <BurgerMenuBtn isOpen={isOpen} setIsOpen={() => setIsOpen(!isOpen)} />
 
-      {isOpen && (
-        <>
-          <div className={css.backdrop} onClick={handleClose} />
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <div className={css.backdrop} onClick={handleClose} />
 
-          <div className={css.content}>
-            <div className={css.navWrap}>
-              <NavLinks direction="column" onClick={handleClose} />
-            </div>
+            <motion.div
+              className={css.content}
+              initial={{ opacity: 0, scale: 0.95, y: -20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -20 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
+              <div className={css.navWrap}>
+                <NavLinks direction="column" onClick={handleClose} />
+              </div>
 
-            {isAuthenticated ? (
-              <UserBar direction="column" onClick={handleClose} />
-            ) : (
-              <AuthBar
-                direction="column"
-                onLoginClick={() => handleAuthClick("login")}
-                onRegisterClick={() => handleAuthClick("register")}
-              />
-            )}
-          </div>
-        </>
-      )}
+              {isAuthenticated ? (
+                <UserBar direction="column" onClick={handleClose} />
+              ) : (
+                <AuthBar
+                  direction="column"
+                  onLoginClick={() => handleAuthClick("login")}
+                  onRegisterClick={() => handleAuthClick("register")}
+                />
+              )}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
