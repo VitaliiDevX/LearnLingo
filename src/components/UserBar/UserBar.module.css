@@ -4,6 +4,23 @@
   gap: 16px;
 }
 
+.row {
+  flex-direction: row;
+}
+
+.column {
+  flex-direction: column;
+
+  .logout {
+    width: 100%;
+  }
+}
+
+.contentWrapper {
+  display: flex;
+  gap: 16px;
+}
+
 .userName {
   font-weight: 700;
   color: var(--color-gray-900);
@@ -15,7 +32,6 @@
 
 .iconLogout {
   display: block;
-  color: var(--color-accent);
   transition: color var(--transition);
   stroke-width: 2;
 }
@@ -23,7 +39,6 @@
 .favButton {
   background-color: transparent;
   border: none;
-  cursor: pointer;
   display: flex;
   align-items: center;
   border-radius: 12px;
@@ -56,6 +71,7 @@
   border-radius: 12px;
   padding: 14px 16px;
   min-width: 105px;
+  background-color: var(--color-accent);
   transition: background-color var(--transition);
 
   font-weight: 700;
