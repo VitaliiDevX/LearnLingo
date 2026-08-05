@@ -1,5 +1,4 @@
 .wrapper {
-  background-color: #000;
   width: 100%;
   border: 1.5px dashed var(--color-accent);
   border-radius: 30px;
