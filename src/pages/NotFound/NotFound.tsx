@@ -5,7 +5,7 @@ import clsx from "clsx";
 export default function NotFound() {
   return (
     <section className={css.section}>
-      <div className={clsx(css.content, "mainContainer")}>
+      <div className={clsx(css.content, "container")}>
         <h1 className={css.title}>404</h1>
         <h2 className={css.subtitle}>Page Not Found</h2>
         <p className={css.text}>

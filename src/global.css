@@ -24,19 +24,7 @@
   --color-laptop-start: #eeb055;
   --color-laptop-end: #d08f38;
 
-  --padding: 20px;
-}
-
-@media only screen and (min-width: 768px) {
-  :root {
-    --padding: 32px;
-  }
-}
-
-@media only screen and (min-width: 1440px) {
-  :root {
-    --padding: 64px;
-  }
+  --padding: clamp(20px, calc(20px + (44 * (100vw - 320px)) / 1120), 64px);
 }
 
 *,
@@ -132,18 +120,10 @@ button {
   color: inherit;
 }
 
-/* container */
-.homeContainer {
+.container {
   width: 100%;
   margin: 0 auto;
   padding: 0 var(--padding);
-  max-width: 1440px;
-}
-
-.mainContainer {
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 calc(var(--padding) * 2);
   max-width: 1440px;
 }
 

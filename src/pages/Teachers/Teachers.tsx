@@ -64,7 +64,7 @@ export default function Teachers() {
 
   return (
     <section className={css.section}>
-      <div className="mainContainer">
+      <div className="container">
         <div className={css.filterWrapper}>
           <SearchBox filters={filters} onChange={handleFilterChange} />
         </div>

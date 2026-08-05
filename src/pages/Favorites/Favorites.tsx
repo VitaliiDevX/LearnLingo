@@ -36,7 +36,7 @@ export default function Favorites() {
 
   return (
     <section className={css.section}>
-      <div className="mainContainer">
+      <div className="container">
         <h1 className={css.title}>Favorite Teachers</h1>
 
         {isPending && <Loader />}
