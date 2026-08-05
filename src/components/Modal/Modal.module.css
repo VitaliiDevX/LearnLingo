@@ -17,7 +17,7 @@
   background-color: var(--color-white);
   border-radius: 30px;
   width: auto;
-  max-width: 600px;
+  max-width: 90vw;
   padding: var(--padding);
   max-height: 90vh;
   display: flex;

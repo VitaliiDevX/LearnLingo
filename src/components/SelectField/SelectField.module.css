@@ -1,5 +1,11 @@
 .wrapper {
-  width: var(--field-width, 100%);
+  width: 100%;
+  min-width: 100%;
+
+  @media only screen and (min-width: 480px) {
+    width: var(--field-width, 100%);
+    min-width: var(--field-width, 100%);
+  }
 }
 
 .labelWrapper {
