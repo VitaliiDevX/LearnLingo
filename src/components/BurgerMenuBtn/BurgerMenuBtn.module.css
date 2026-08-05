@@ -1,0 +1,27 @@
+.button {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  padding: 12px;
+  transition:
+    background-color var(--transition),
+    color var(--transition);
+  color: var(--color-accent);
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-accent-hover);
+    color: var(--color-gray-900);
+  }
+}
+
+.active {
+  background-color: var(--color-accent-hover);
+  color: var(--color-gray-900);
+}
+
+.icon {
+  stroke-width: 2;
+}
