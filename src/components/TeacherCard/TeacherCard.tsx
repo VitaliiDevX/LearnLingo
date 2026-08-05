@@ -108,6 +108,14 @@ export default function TeacherCard({ teacher }: Props) {
 
   return (
     <div className={css.card}>
+      <button
+        onClick={handleToggleFavorite}
+        disabled={isPending}
+        className={clsx(css.favButton, isFavorite ? css.isFavorite : "")}
+        aria-label="Toggle favorite"
+      >
+        <Heart size={26} className={css.iconHeart} />
+      </button>
       <div className={css.avatarWrapper}>
         <Avatar
           url={teacher.avatar_url}
@@ -138,14 +146,6 @@ export default function TeacherCard({ teacher }: Props) {
               </li>
             ))}
           </ul>
-          <button
-            onClick={handleToggleFavorite}
-            disabled={isPending}
-            className={clsx(css.favButton, isFavorite ? css.isFavorite : "")}
-            aria-label="Toggle favorite"
-          >
-            <Heart size={26} className={css.iconHeart} />
-          </button>
         </div>
         <h3 className={css.title}>{`${teacher.name} ${teacher.surname}`}</h3>
         <ul className={css.infoList}>
@@ -187,19 +187,21 @@ export default function TeacherCard({ teacher }: Props) {
               <ul className={css.reviewList}>
                 {teacher.reviews.map((review, index) => (
                   <li key={index} className={css.reviewItem}>
-                    <Avatar
-                      name={review.reviewer_name}
-                      className={css.reviewAvatar}
-                    />
+                    <div className={css.reviewHeader}>
+                      <Avatar
+                        name={review.reviewer_name}
+                        className={css.reviewAvatar}
+                      />
 
-                    <div className={css.reviewerInfo}>
-                      <span className={css.reviewerName}>
-                        {review.reviewer_name}
-                      </span>
-                      <span className={css.reviewerRating}>
-                        <Icon id="icon-star" className={css.icon} />
-                        {review.reviewer_rating.toFixed(1)}
-                      </span>
+                      <div className={css.reviewerInfo}>
+                        <span className={css.reviewerName}>
+                          {review.reviewer_name}
+                        </span>
+                        <span className={css.reviewerRating}>
+                          <Icon id="icon-star" className={css.icon} />
+                          {review.reviewer_rating.toFixed(1)}
+                        </span>
+                      </div>
                     </div>
 
                     <p className={css.comment}>{review.comment}</p>
