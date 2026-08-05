@@ -10,6 +10,10 @@ export default function ThemeSelector() {
   const { allThemes, currentTheme, changeTheme } = useThemeStore();
 
   useEffect(() => {
+    const handleEscKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+
     const handleClickOutside = (e: MouseEvent) => {
       if (
         dropdownRef.current &&
@@ -18,9 +22,17 @@ export default function ThemeSelector() {
         setIsOpen(false);
       }
     };
+
+    document.addEventListener("keydown", handleEscKey);
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscKey);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
+  const handleClose = () => setIsOpen(false);
 
   return (
     <div className={css.dropdownContainer} ref={dropdownRef}>
@@ -32,28 +44,32 @@ export default function ThemeSelector() {
         <Droplet size={24} className={css.icon} />
       </button>
       {isOpen && (
-        <ul className={css.dropdownList}>
-          {allThemes.map((theme) => (
-            <li
-              key={theme.id}
-              className={clsx(
-                css.dropdownItem,
-                currentTheme.id === theme.id && css.activeColor,
-              )}
-            >
-              <button
-                className={css.colorButton}
-                onClick={() => {
-                  changeTheme(theme.id);
-                  setIsOpen(false);
-                }}
-                disabled={currentTheme.id === theme.id}
-                style={{ backgroundColor: theme.primary }}
-                aria-label={`Select ${theme.name} theme`}
-              />
-            </li>
-          ))}
-        </ul>
+        <>
+          <div className={css.backdrop} onClick={handleClose} />
+
+          <ul className={css.dropdownList}>
+            {allThemes.map((theme) => (
+              <li
+                key={theme.id}
+                className={clsx(
+                  css.dropdownItem,
+                  currentTheme.id === theme.id && css.activeColor,
+                )}
+              >
+                <button
+                  className={css.colorButton}
+                  onClick={() => {
+                    changeTheme(theme.id);
+                    setIsOpen(false);
+                  }}
+                  disabled={currentTheme.id === theme.id}
+                  style={{ backgroundColor: theme.primary }}
+                  aria-label={`Select ${theme.name} theme`}
+                />
+              </li>
+            ))}
+          </ul>
+        </>
       )}
     </div>
   );
