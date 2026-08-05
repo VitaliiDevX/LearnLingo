@@ -16,6 +16,7 @@ import { useAuthStore } from "../../store/useAuthStore";
 import type { LoginValues, RegisterValues } from "../../types/auth";
 import { FORMS_CONFIG, type FormType } from "../../constants/forms";
 import { useAuth } from "../../lib/hooks/useAuth";
+import BurgerMenu from "../BurgerMenu/BurgerMenu";
 
 export default function Header() {
   const [modalType, setModalType] = useState<FormType | null>(null);
@@ -51,23 +52,30 @@ export default function Header() {
 
   return (
     <header className={clsx(css.header, isScrolled && css.headerScrolled)}>
-      <div className={clsx(css.headerContent, "mainContainer")}>
+      <div className={clsx(css.headerContent, "container")}>
         <Logo />
 
-        <NavLinks />
+        <div className={css.navLinks}>
+          <NavLinks />
+        </div>
 
-        <div className={css.authButtons}>
+        <div className={css.buttonWrapper}>
           <ThemeSelector />
-          {isInitializing ? (
-            <AuthBarSkeleton />
-          ) : isAuthenticated ? (
-            <UserBar />
-          ) : (
-            <AuthBar
-              onLoginClick={() => setModalType("login")}
-              onRegisterClick={() => setModalType("register")}
-            />
-          )}
+          <div className={css.authButtons}>
+            {isInitializing ? (
+              <AuthBarSkeleton />
+            ) : isAuthenticated ? (
+              <UserBar />
+            ) : (
+              <AuthBar
+                onLoginClick={() => setModalType("login")}
+                onRegisterClick={() => setModalType("register")}
+              />
+            )}
+          </div>
+          <div className={css.mobileBurger}>
+            <BurgerMenu onOpenModal={(type) => setModalType(type)} />
+          </div>
         </div>
       </div>
       <Modal isOpen={!!config} onClose={closeModal}>
