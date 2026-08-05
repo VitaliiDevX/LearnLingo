@@ -1,6 +1,17 @@
 .nav {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 28px;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.column {
+  flex-direction: column;
+  gap: 16px;
 }
 
 .link {
